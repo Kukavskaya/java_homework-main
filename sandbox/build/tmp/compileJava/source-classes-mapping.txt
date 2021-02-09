@@ -1,0 +1,10 @@
+stqa/homework/ek/Rectangle.java
+ stqa.homework.ek.Rectangle
+stqa/homework/ek/MyFirstProgram.java
+ stqa.homework.ek.MyFirstProgram
+stqa/homework/ek/PointCoordinates.java
+ stqa.homework.ek.PointCoordinates
+stqa/homework/ek/Square.java
+ stqa.homework.ek.Square
+stqa/homework/ek/Point.java
+ stqa.homework.ek.Point

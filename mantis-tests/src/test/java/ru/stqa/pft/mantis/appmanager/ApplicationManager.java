@@ -23,6 +23,7 @@ public class ApplicationManager {
   private JamesHelper jamesHelper;
   private DbHelper dbHelper;
   private PasswordHelper passwordHelper;
+  private SoapHelper soapHelper;
 
 
   public ApplicationManager(String browser) {
@@ -109,6 +110,13 @@ public class ApplicationManager {
       wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
+  }
+
+  public SoapHelper soap() {
+    if (soapHelper == null) {
+      soapHelper = new SoapHelper(this);
+    }
+    return soapHelper;
   }
 
 }

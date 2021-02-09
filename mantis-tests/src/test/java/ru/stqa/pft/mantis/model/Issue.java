@@ -6,6 +6,16 @@ public class Issue {
   private String summary;
   private String description;
   private Project project;
+  private int status;
+
+  public Issue withStatus(int status) {
+    this.status = status;
+    return this;
+  }
+
+  public int getStatus() {
+    return status;
+  }
 
   public Issue withId(int id) {
     this.id = id;

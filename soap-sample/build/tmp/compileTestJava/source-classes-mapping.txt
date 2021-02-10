@@ -1,2 +1,0 @@
-ru/stqa/pft/soap/GeoIpServiceTests.java
- ru.stqa.pft.soap.GeoIpServiceTests

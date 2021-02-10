@@ -2,6 +2,4 @@
 .idea/gradle.xml
 .idea/gradle.xml
 soap-sample/build/classes/java/main/com/lavasoft/GetCountryISO2ByNameResponse.class
-*.class
-*.class
-*.class
+*.out

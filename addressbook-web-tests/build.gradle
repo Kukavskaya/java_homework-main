@@ -21,13 +21,13 @@ task testGroups (type : Test) {
         suites 'src/test/resources/testng-groups.xml'
     }
     if (project.hasProperty('browser')) {
-        systemProperties 'browser', "${browser}"
+        systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('paltform')) {
-        systemProperties 'paltform', "${paltform}"
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
     }
     if (project.hasProperty('target')) {
-        systemProperties 'target', "${target}"
+        systemProperty 'target', "${target}"
     }
 }
 
@@ -36,12 +36,12 @@ task testContacts (type : Test) {
         suites 'src/test/resources/testng-contacts.xml'
     }
     if (project.hasProperty('browser')) {
-        systemProperties 'browser', "${browser}"
+        systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('paltform')) {
-        systemProperties 'paltform', "${paltform}"
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${platform}"
     }
     if (project.hasProperty('target')) {
-        systemProperties 'target', "${target}"
+        systemProperty 'target', "${target}"
     }
 }

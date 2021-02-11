@@ -3,3 +3,4 @@
 .idea/gradle.xml
 soap-sample/build/classes/java/main/com/lavasoft/GetCountryISO2ByNameResponse.class
 *.out
+addressbook-web-tests/test-20210211T131349.log

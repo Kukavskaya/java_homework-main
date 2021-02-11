@@ -3,17 +3,13 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.appmanager.ContactHelper;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -88,11 +84,36 @@ public class ContactHelper extends HelperBase {
     contactCash = null;
   }
 
+  public void deleteGroupFromContact(GroupData group) {
+    selectGroup(group.getId());
+    selectContact();
+    removeContactFromGroup();
+  }
+
+  private void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  private void removeContactFromGroup() {
+    click(By.xpath("//input[@name='remove']"));
+  }
+
+  private void selectGroup(int id) {
+    click(By.xpath("(//select[@name='group']"));
+  }
+
+//  public GroupData groupWithContact(GroupData group) {
+//    Groups groups = app.db().groups();
+//    for (GroupData : groups)
+//      if ( groups.getContacts.size() > 0 ) ;
+//      return group;
+//  }
+
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContacts();
-    app.acceptNextAlert = true;
-    assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+//    app.acceptNextAlert = true;
+//    assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     contactCash = null;
     app.goTo().homePage();
   }

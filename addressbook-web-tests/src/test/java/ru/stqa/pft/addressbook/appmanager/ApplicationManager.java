@@ -59,7 +59,7 @@ public class ApplicationManager {
     System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
     System.setProperty("webdriver.firefox.driver", "lib/geckodriver.exe");
 
-    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
     groupHelper = new GroupHelper(wd);
     contactHelper = new ContactHelper(wd);

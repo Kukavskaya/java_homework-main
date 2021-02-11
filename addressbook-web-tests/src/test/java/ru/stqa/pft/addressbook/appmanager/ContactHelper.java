@@ -112,8 +112,8 @@ public class ContactHelper extends HelperBase {
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContacts();
-//    app.acceptNextAlert = true;
-//    assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    app.acceptNextAlert = true;
+    assertTrue(app.closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
     contactCash = null;
     app.goTo().homePage();
   }

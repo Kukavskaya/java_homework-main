@@ -20,11 +20,11 @@ public class TestBase {
 
 
   public boolean isIssueOpen(int issueId) {
-    String json = RestAssured.get("https://bugify.stqa.ru/api/issues.json").asString();
+    String json = RestAssured.get("https://bugify.stqa.ru/api/issues/" + issueId + ".json").asString();
     JsonElement parsed = new JsonParser().parse(json);
     JsonElement issues = parsed.getAsJsonObject().get("issues");
     Set<Issue> issuesSet = new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
-    Issue issue = issuesSet.stream().filter(is -> is.getId() == issueId).findAny().orElse(null);
+    Issue issue = issuesSet.iterator().next(); //stream().filter(is -> is.getId() == issueId).findAny().orElse(null);
     return ! issue.getStateName().equals("Close");
   }
 

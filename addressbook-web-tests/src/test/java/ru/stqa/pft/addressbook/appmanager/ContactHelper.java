@@ -84,31 +84,6 @@ public class ContactHelper extends HelperBase {
     contactCash = null;
   }
 
-  public void deleteGroupFromContact(GroupData group) {
-    selectGroup(group.getId());
-    selectContact();
-    removeContactFromGroup();
-  }
-
-  private void selectContact() {
-    click(By.name("selected[]"));
-  }
-
-  private void removeContactFromGroup() {
-    click(By.xpath("//input[@name='remove']"));
-  }
-
-  private void selectGroup(int id) {
-    click(By.xpath("(//select[@name='group']"));
-  }
-
-//  public GroupData groupWithContact(GroupData group) {
-//    Groups groups = app.db().groups();
-//    for (GroupData : groups)
-//      if ( groups.getContacts.size() > 0 ) ;
-//      return group;
-//  }
-
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContacts();
@@ -171,4 +146,38 @@ public class ContactHelper extends HelperBase {
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
   }
+
+  public void deleteGroupFromContact(GroupData group) {
+    selectGroup(group.getId());
+    selectContact();
+    removeContactFromGroup();
+  }
+
+  private void selectGroup(int id) {
+    wd.findElement(By.xpath("//select[@name='group']/option[@value='"+ id +"']")).click();
+  }
+
+  private void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+  private void removeContactFromGroup() {
+    click(By.xpath("//input[@name='remove']"));
+  }
+
+  public void addGroupToContact(GroupData groupToAdd) {
+    selectGroupToAdd(groupToAdd.getId());
+    selectContact();
+    addContactFromGroup();
+  }
+
+  private void selectGroupToAdd(int id) {
+    wd.findElement(By.xpath("//select[@name='to_group']/option[@value='"+ id +"']")).click();
+  }
+
+  private void addContactFromGroup() {
+    click(By.xpath("//input[@name='add']"));
+  }
+
+
 }

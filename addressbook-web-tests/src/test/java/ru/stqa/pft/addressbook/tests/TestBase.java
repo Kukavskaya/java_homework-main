@@ -8,6 +8,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
+import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
@@ -53,6 +54,35 @@ public class TestBase {
       assertThat(uiGroups, equalTo(dbGroups.stream()
               .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
               .collect(Collectors.toSet())));
+    }
+  }
+
+  public void ensureContactExists() {
+    if ( app.db().contacts().size() == 0 ) {
+      Groups groups = app.db().groups();
+      ContactData newContact = new ContactData().withFirstname("user1").withLastname("user1").withAddress("address1")
+              .inGroups(groups.iterator().next());
+      app.goTo().homePage();
+      app.contact().create(newContact, true);
+    }
+  }
+
+  public void ensureContactInGroupExists() {
+    if ( app.db().groups().stream()
+            .filter((g) -> g.getContacts().size() > 0).count() == 0 ) {
+      GroupData groupToAdd = app.db().groups().stream()
+              //.filter((g) -> g.getContacts().size() == 0)
+              .findFirst().get();
+      app.goTo().homePage();
+      app.contact().addGroupToContact(groupToAdd);
+    }
+  }
+
+  protected void ensureGroupExists() {
+    if ( app.db().groups().size() == 0 ) {
+      app.goTo().GroupPage();
+      GroupData group = new GroupData().withName("test1");
+      app.group().create(group);
     }
   }
 }

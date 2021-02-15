@@ -154,7 +154,7 @@ public class ContactHelper extends HelperBase {
   }
 
   private void selectGroup(int id) {
-    wd.findElement(By.xpath("//select[@name='group']/option[@value='"+ id +"']")).click();
+    wd.findElement(By.xpath("//select[@name='group']/option[@value='"+ id +"']")).click(); //select group with added contact
   }
 
   private void selectContact() {
@@ -163,6 +163,12 @@ public class ContactHelper extends HelperBase {
 
   private void removeContactFromGroup() {
     click(By.xpath("//input[@name='remove']"));
+  }
+
+  public void addGroupToContact(GroupData groupToAdd, ContactData contactToAdd){
+    selectContactById(contactToAdd.getId());
+    selectGroupToAdd(groupToAdd.getId());
+    addContactFromGroup();
   }
 
   public void addGroupToContact(GroupData groupToAdd) {

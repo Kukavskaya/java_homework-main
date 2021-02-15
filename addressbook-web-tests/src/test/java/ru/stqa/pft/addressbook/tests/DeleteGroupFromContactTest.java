@@ -2,43 +2,20 @@ package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import static org.testng.Assert.assertEquals;
 
-public class DeleteGroupFromContactTest extends TestBase{
+public class DeleteGroupFromContactTest extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions(){
-    if (app.db().contacts().size() == 0) {
-      if (app.db().groups().size() > 0) {
-        Groups groups = app.db().groups();
-        ContactData newContact = new ContactData().withFirstname("user1").withLastname("user1").withAddress("address1")
-                .inGroups(groups.iterator().next());
-        app.goTo().homePage();
-        app.contact().create(newContact, true);
-      } else {
-        app.goTo().GroupPage();
-        GroupData group = new GroupData().withName("test1");
-        app.group().create(group);
-        ContactData newContact = new ContactData().withFirstname("user1").withLastname("user1").withAddress("address1")
-                .inGroups(group);
-        app.goTo().homePage();
-        app.contact().create(newContact, true);
-      }
-    }
-
-      GroupData groupToAdd = app.db().groups().stream()
-              .filter((g) -> g.getContacts().size() > 0)
-              .findFirst().get();
-      app.goTo().homePage();
-      app.contact().addGroupToContact(groupToAdd);
+  public void ensurePreconditions() {
+    ensureGroupExists();
+    ensureContactExists();
+    ensureContactInGroupExists();
   }
 
   @Test
@@ -48,7 +25,7 @@ public class DeleteGroupFromContactTest extends TestBase{
     long before = groups.stream()
             .filter((g) -> g.getContacts().size() > 0).count();
 
-    GroupData groupToDelete = groups.stream()
+    GroupData groupToDelete = groups.stream()           //select group with added contact
             .filter((g) -> g.getContacts().size() > 0)
             .findFirst()
             .orElseThrow(NoSuchElementException::new);
